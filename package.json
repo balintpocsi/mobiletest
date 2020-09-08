@@ -1,0 +1,19 @@
+{
+  "name": "appiumproject2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "codeceptjs": "^2.6.10",
+    "puppeteer": "^5.2.1",
+    "appium": "^1.18.1",
+    "webdriverio": "^6.4.5",
+    "selenium-standalone": "6.19.0"
+  }
+}

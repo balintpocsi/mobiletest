@@ -1,0 +1,25 @@
+{
+    "devDependencies": {
+    "codeceptjs": "1.0.3",
+        "gulp": "^3.9.1",
+        "gulp-run": "^1.7.1",
+        "selenium-standalone": "6.4.1",
+        "testrail-api": "^1.0.6",
+        "webdriverio": "^4.8.0"
+},
+    "scripts": {
+    "iosNative": "environment=staging profile=iosNative codeceptjs run --steps --config ./appium.conf.js",
+        "iosWeb": "environment=prod profile=iosWeb codeceptjs run --steps",
+        "local": "npm run stop-containers && testrail=false environment=staging profile=local codeceptjs run --steps",
+        "docker": "testrail=$TESTRAIL environment=$ENV profile=docker GREP=$GREP testsfilter=$TESTSFILTER codeceptjs run",
+        "selenium-docker": "docker run -tid --name selenium -h selenium -p 4444:4444 -p 5900:5900 -v /var/run/docker.sock:/var/run/docker.sock selenium\/standalone-chrome",
+        "codeceptjs-docker": "docker run --name codeceptjs -h codeceptjs --link selenium:selenium -v $(pwd):/tests -e testrail=false -v /var/run/docker.sock:/var/run/docker.sock -e profile=docker-local -e environment=staging -e CODECEPT_ARGS=--steps 10.10.8.47:5000\/codeceptjs:0.6.3-local",
+        "local-docker": "npm run stop-containers && npm run selenium-docker && npm run codeceptjs-docker",
+        "stop-containers": "docker stop selenium codeceptjs || true && docker rm selenium codeceptjs || true",
+        "smoke-mobile": "testrail=false environment=staging profile=local codeceptjs run --grep @smoke --steps"
+},
+    "dependencies": {
+    "lodash": "^4.17.4",
+        "sync-request": "^4.1.0"
+}
+}
